@@ -33,3 +33,7 @@ await producManager.addProduct(rolex2);
 const found = await producManager.getProductById(75);
 
 const allproducts = await producManager.getproducts();
+
+await producManager.updateProduct(75, { price: 55 });
+
+await producManager.deleteProduct(75);
