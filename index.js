@@ -1,4 +1,4 @@
-import ProductManager from "./JS/ProductManager.js";
+import ProductManager from "./src/JS/ProductManager.js";
 
 const createId = () => {
   const id = Math.floor(Math.random() * 100);
@@ -8,7 +8,8 @@ const createId = () => {
 const producManager = new ProductManager();
 
 const rolex = {
-  code: createId(),
+  id: createId(),
+  code: 18765,
   description: "Relogio Rolex",
   price: 10000000,
   stock: 1,
@@ -18,6 +19,7 @@ const rolex = {
 };
 
 const rolex2 = {
+  id: 2,
   code: 75,
   description: "Relogio Rolex",
   price: 10000000,
@@ -30,10 +32,10 @@ const rolex2 = {
 await producManager.addProduct(rolex);
 await producManager.addProduct(rolex2);
 
-const found = await producManager.getProductById(75);
+const found = await producManager.getProductById(2);
 
 const allproducts = await producManager.getproducts();
 
-await producManager.updateProduct(75, { price: 55 });
+await producManager.updateProduct(2, { price: 55 });
 
 await producManager.deleteProduct(75);

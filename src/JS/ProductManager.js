@@ -1,9 +1,10 @@
 import * as fs from "fs/promises";
 
 export default class ProductManager {
+  #path = "./Data/Products.txt";
   constructor() {
     this.products = [];
-    this.path = "./Data/Products.txt";
+    this.path = this.#path;
   }
   #lerArquivo = async () => {
     const arquivos = JSON.parse(await fs.readFile(this.path, "utf-8"));
@@ -20,6 +21,7 @@ export default class ProductManager {
       }
     });
     if (
+      !data.id ||
       !data.code ||
       !data.description ||
       !data.title ||
@@ -44,7 +46,7 @@ export default class ProductManager {
   async getProductById(id) {
     const products = await this.#lerArquivo();
 
-    const foundProduct = products.filter((prod) => prod.code === id);
+    const foundProduct = products.filter((prod) => prod.id === id);
 
     if (!foundProduct) {
       throw new Error("Produto não encontrado!!");
@@ -60,7 +62,7 @@ export default class ProductManager {
 
   async updateProduct(productId, updatedProductData) {
     const products = await this.#lerArquivo();
-    const index = products.findIndex((product) => product.code === productId);
+    const index = products.findIndex((product) => product.id === productId);
 
     if (index !== -1) {
       // Atualiza o produto no array
